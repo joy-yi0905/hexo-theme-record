@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+
+  <% if (config.author){ %>
+  <meta name="author" content="<%= config.author %>">
+  <% } %>
+
+  <% if (page.description){ %>
+  <meta name="description" content="<%= page.description %> | <%= config.title %>">
+  <% } else if (config.description){ %>
+  <meta name="description" content="<%= config.description %>">
+  <% } else if (page.excerpt){ %>
+  <meta name="description" content="<%= strip_html(page.excerpt).replace(/^\s*/, '').replace(/\s*$/, '') %>">
+  <% } else if (page.content){ %>
+  <meta name="description" content="<%= strip_html(page.content).replace(/^\s*/, '').replace(/\s*$/, '').substring(0, 150) %>">
+  <% } %>
+
+  <% if (page.keywords){ %>
+  <meta name="keywords" content="<%= page.keywords %>">
+  <% } else if (config.keywords){ %>
+  <meta name="keywords" content="<%= config.keywords %>">
+  <% } else if (page.tags){%>
+  <%
+    var keywords = [];
+    page.tags.forEach(function(tag){
+      keywords.push(tag.name);
+    });
+  %>
+  <meta name="keywords" content="<%= keywords.join(",") %>">
+  <% } %>
+
+  <%
+    var title = page.title;
+
+    if (is_archive()){
+      title = __('archive_a');
+
+      if (is_month()){
+        title += ': ' + page.year + '/' + page.month;
+      } else if (is_year()){
+        title += ': ' + page.year;
+      }
+    } else if (is_category()){
+      title = __('category') + ': ' + page.category;
+    } else if (is_tag()){
+      title = __('tag') + ': ' + page.tag;
+    }
+  %>
+
+  <title><% if (title){ %><%= title %> | <% } %><%= config.title %></title>
+
+  <%- css('css/blog.css') %>
+</head>
+<body>
+
+<div class="blog">

@@ -1,0 +1,29 @@
+<div class="post">
+
+  <h2 class="post-title"><a href="<%- config.root %><%- post.path %>"><%- post.title %></a></h2>
+
+  <time class="post-time"><%- post.date.format("YYYY-MM-DD") %></time>
+
+  <div class="post-content">
+    <% if (post.excerpt){ %>
+        <%- post.excerpt %>
+        <% if (theme.excerpt_link){ %>
+          <div class="post-more-link">
+            <a href="<%- url_for(post.path) %>#more"><%= theme.excerpt_link %></a>
+          </div>
+        <% } %>
+    <% } else { %>
+      <%- post.content %>
+    <% } %>
+  </div>
+
+  <% if (post.tags && post.tags.length){ %>
+    <div class="post-tag">
+      <%- list_tags(post.tags, {
+        style: false,
+        show_count: true
+      }) %>
+    </div>
+  <% } %>
+
+</div>

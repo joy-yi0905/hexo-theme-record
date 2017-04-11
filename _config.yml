@@ -1,0 +1,16 @@
+# Header
+menu:
+  Home: /
+  Archives: /archives
+  about: /about
+rss: /atom.xml
+
+# Content
+excerpt_link: 全文» 
+
+# Css
+less: 
+  compress: true
+
+# Baidu analytics (please modify your website baiduTrackId)
+baiduTrackId: 7d5550c80ba3b42cfa5323fc0e92699f

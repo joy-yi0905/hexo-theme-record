@@ -1,0 +1,17 @@
+<%- partial("_partial/head") %>
+
+<%- partial("_partial/navigation") %>
+
+<div class="post">
+
+  <h1 class="post-title"><%- page.title %></h1>
+
+  <time class="post-time"><%- page.date.format("YYYY-MM-DD") %></time>
+
+  <div class="post-content">
+    <%- page.content %>
+  </div>
+
+</div>
+
+<%- partial("_partial/bottom") %>

@@ -1,0 +1,16 @@
+<%- partial("_partial/head") %>
+
+<%- partial("_partial/navigation") %>
+
+<div class="posts">
+  <% page.posts.sort("date", "desc").each(function(post){ %>
+    <%- partial("_partial/post_entry", {post: post}) %>
+  <% }) %>
+</div>
+
+<div class="pagination">
+  <%- paginator({prev_next: false}) %>
+</div>
+
+<%- partial("_partial/bottom") %>
+

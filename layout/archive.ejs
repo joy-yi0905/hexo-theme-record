@@ -1,0 +1,56 @@
+<%- partial("_partial/head") %>
+
+<%- partial("_partial/navigation") %>
+
+<div class="archives">
+
+  <%- splitPostByYear(site.posts.sort("date", "desc")) %>
+
+</div>
+
+<%
+
+function convertArray(posts) {
+  var postsArr = [];
+
+  posts.each(function(post) {
+    postsArr.push(post);
+  });
+
+  return postsArr;
+}
+
+function splitPostByYear(posts) {
+  var posts = convertArray(posts),
+    firstYear = posts[0].date.format("YYYY-MM-DD").split('-')[0];
+
+  var listStr = `<div class="group"><h3 class="year">${firstYear}</h3><ul class="list">`,
+    splitYear = firstYear;
+
+  posts.forEach(function(post) {
+    var year = post.date.format("YYYY-MM-DD").split('-')[0];
+
+    if (year !== splitYear) {
+      listStr += `</ul></div><div class="group"><h3 class="year">${year}</h3><ul class="list">`;
+      listStr += `<li><a href="${config.root}${post.path}"><span class="post-title">${post.title}</span></a>`;
+      listStr += `<time class="post-time">${post.date.format("MM.DD")}</time></li>`;
+
+      splitYear = year;
+    } else {
+      listStr += `<li><a href="${config.root}${post.path}"><span class="post-title">${post.title}</span></a>`;
+      listStr += `<time class="post-time">${post.date.format("MM.DD")}</time></li>`;
+    }
+
+  });
+
+  listStr += '</ul></div>';
+
+  return listStr;
+}
+
+%>
+
+<%- partial("_partial/bottom") %>
+
+
+
