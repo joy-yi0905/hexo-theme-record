@@ -2,7 +2,11 @@
 menu:
   Home: /
   Archives: /archives
-  about: /about
+  About: /about
+  Rss: /atom.xml
+
+
+# Rss: open the rss  
 rss: /atom.xml
 
 # Content
